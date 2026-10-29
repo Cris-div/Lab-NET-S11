@@ -1,0 +1,4 @@
+{
+  "version": "2.0.0",
+  "tasks": [{ "label": "build", "type": "process", "command": "dotnet", "args": ["build", "${workspaceFolder}/Eventos.Web/Eventos.Web.csproj"], "options": { "env": { "DOTNET_CLI_HOME": "${workspaceFolder}/.dotnet-home" } }, "problemMatcher": "$msCompile", "group": { "kind": "build", "isDefault": true } }]
+}

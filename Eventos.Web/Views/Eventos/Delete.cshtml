@@ -1,0 +1,3 @@
+@model Eventos.Web.ViewModels.EventoFila
+@{ViewData["Title"] = "Desactivar evento";}
+<a class="back-link" asp-action="Index">← Volver a la agenda</a><section class="form-panel confirm-panel"><p class="eyebrow">GESTIONAR EVENTO</p><h1>¿Desactivar este evento?</h1><h2>@Model.Evento.Titulo</h2><p>El evento dejará de aparecer en la agenda y no recibirá nuevas inscripciones. Sus datos y las @Model.Confirmados inscripciones confirmadas se conservarán.</p><form asp-action="Delete" asp-route-id="@Model.Evento.Id" method="post"><div asp-validation-summary="All" class="text-danger"></div><div class="form-actions"><button class="btn btn-danger" type="submit">Desactivar evento</button><a class="btn btn-light" asp-action="Index">Volver</a></div></form></section>

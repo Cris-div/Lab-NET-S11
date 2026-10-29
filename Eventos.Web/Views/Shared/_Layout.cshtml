@@ -1,0 +1,27 @@
+@{ var actual = ViewContext.RouteData.Values["controller"]?.ToString(); }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] · Encuentro</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header"><nav class="nav-shell" aria-label="Navegación principal">
+        <a class="brand" asp-controller="Eventos" asp-action="Index"><span class="brand-icon">e</span>encuentro<span class="brand-dot">.</span></a>
+        <div class="nav-links"><a class="@(actual == "Eventos" ? "active" : "")" asp-controller="Eventos" asp-action="Index">Eventos</a><a class="@(actual == "Asistentes" ? "active" : "")" asp-controller="Asistentes" asp-action="Index">Asistentes</a><a class="@(actual == "Inscripciones" ? "active" : "")" asp-controller="Inscripciones" asp-action="Index">Inscripciones</a></div>
+        <span class="nav-caption">Un espacio para conectar ↗</span>
+    </nav></header>
+    <main class="main-shell" id="contenido">
+        @if (TempData["Exito"] is string exito) { <div class="alert alert-success" role="status">✓ @exito</div> }
+        @if (TempData["Aviso"] is string aviso) { <div class="alert alert-warning" role="status">@aviso</div> }
+        @RenderBody()
+    </main>
+    <footer class="site-footer"><div><span class="footer-brand">encuentro.</span><span>Eventos que acercan personas.</span><span>Agenda · Comunidad · Conexiones</span></div></footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

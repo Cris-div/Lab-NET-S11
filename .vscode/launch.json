@@ -1,0 +1,4 @@
+{
+  "version": "0.2.0",
+  "configurations": [{ "name": "Eventos.Web", "type": "coreclr", "request": "launch", "preLaunchTask": "build", "program": "${workspaceFolder}/Eventos.Web/bin/Debug/net10.0/Eventos.Web.dll", "cwd": "${workspaceFolder}/Eventos.Web", "console": "internalConsole", "stopAtEntry": false, "env": { "ASPNETCORE_ENVIRONMENT": "Development", "ASPNETCORE_URLS": "http://localhost:5291" }, "serverReadyAction": { "action": "openExternally", "pattern": "\\bNow listening on:\\s+(https?://\\S+)" } }]
+}

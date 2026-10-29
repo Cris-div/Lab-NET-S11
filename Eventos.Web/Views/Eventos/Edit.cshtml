@@ -1,0 +1,5 @@
+@model Evento
+@{ViewData["Title"] = "Editar evento";}
+<a class="back-link" asp-action="Index">← Volver a la agenda</a><div class="form-heading"><p class="eyebrow">ACTUALIZA LA AGENDA</p><h1>Edita los detalles<span>.</span></h1><p class="muted">Los cambios se aplican al evento y conservan sus inscripciones.</p></div>
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" class="form-panel"><input asp-for="Id" type="hidden"/><partial name="_Form" model="Model"/><div class="form-actions"><button type="submit" class="btn btn-primary">Guardar cambios</button><a asp-action="Index" class="btn btn-light">Volver</a></div></form>
+@section Scripts {<partial name="_ValidationScriptsPartial"/>}

@@ -1,0 +1,3 @@
+@model Inscripcion
+@{ViewData["Title"] = "Cancelar inscripción";}
+<a class="back-link" asp-action="Index">← Volver a inscripciones</a><section class="form-panel confirm-panel"><p class="eyebrow">GESTIONAR INSCRIPCIÓN</p><h1>¿Cancelar este lugar?</h1><h2>@Model.Evento?.Titulo</h2><p>Asistente: <strong>@Model.Asistente?.Nombres</strong></p><p>El registro se conservará con estado Cancelada y su cupo quedará disponible.</p><form asp-action="Cancelar" asp-route-id="@Model.Id" method="post"><div asp-validation-summary="All" class="text-danger"></div><div class="form-actions">@if(Model.Estado == "Confirmada"){<button class="btn btn-danger" type="submit">Cancelar inscripción</button>}<a asp-action="Index" class="btn btn-light">Volver</a></div></form></section>

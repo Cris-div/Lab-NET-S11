@@ -1,0 +1,13 @@
+@model Eventos.Web.ViewModels.EventosIndexViewModel
+@{ ViewData["Title"] = "Eventos"; }
+<section class="page-heading"><div><p class="eyebrow">TU PRÓXIMO PUNTO DE ENCUENTRO</p><h1>Ideas que nos reúnen<span>.</span></h1><p class="lead">Explora la agenda, encuentra tu evento y reserva un lugar.</p></div><a class="btn btn-primary" asp-action="Create">＋ Crear evento</a></section>
+<section class="stats" aria-label="Resumen de la agenda"><div><strong>@Model.Eventos.Count</strong><span>eventos en agenda</span></div><div><strong>@Model.Eventos.Sum(e => e.Confirmados)</strong><span>inscripciones confirmadas</span></div><div><strong>@Model.Eventos.Sum(e => e.Disponibles)</strong><span>cupos disponibles</span></div></section>
+<form method="get" class="filterbar"><div><label asp-for="CategoriaId">Explorar por categoría</label><select asp-for="CategoriaId" asp-items="Model.Categorias" class="form-select"><option value="">Todas las categorías</option></select></div><button class="btn btn-outline-primary" type="submit">Filtrar agenda</button>@if(Model.CategoriaId.HasValue){<a asp-action="Index" class="text-link">Ver todos</a>}<span class="muted filter-note">Ordenados por fecha · de más próximo a más lejano</span></form>
+@if (!Model.Eventos.Any()) { <div class="empty-state"><h2>La agenda está por comenzar</h2><p>No hay eventos activos para esta selección.</p><a asp-action="Create" class="btn btn-primary">Crear un evento</a></div> }
+<div class="event-grid">
+@foreach (var fila in Model.Eventos)
+{
+    var e = fila.Evento;
+    <article class="event-card"><div class="event-top"><div class="date-tile"><strong>@e.Fecha.ToString("dd")</strong><span>@e.Fecha.ToString("MMM").ToUpper()</span></div><span class="pill">@e.Categoria?.Nombre</span></div><div class="event-body"><p class="event-format">@e.Modalidad · @e.Fecha.ToString("HH:mm") h</p><h2><a asp-action="Details" asp-route-id="@e.Id">@e.Titulo</a></h2><p class="location">@e.Lugar</p><div class="capacity"><span>@fila.Confirmados confirmados</span><strong>@fila.Disponibles de @e.Aforo cupos libres</strong></div><progress value="@fila.Confirmados" max="@e.Aforo" aria-label="Ocupación del evento"></progress><div class="event-bottom"><strong class="price">@(e.Precio == 0 ? "Gratis" : "S/ " + e.Precio.ToString("N2"))</strong><a class="btn btn-sm btn-primary" asp-controller="Inscripciones" asp-action="Create" asp-route-eventoId="@e.Id">Inscribir asistente ↗</a></div></div><div class="card-actions"><a asp-action="Details" asp-route-id="@e.Id">Ver detalle</a><a asp-action="Edit" asp-route-id="@e.Id">Editar</a><a class="danger-link" asp-action="Delete" asp-route-id="@e.Id">Desactivar</a></div></article>
+}
+</div>
